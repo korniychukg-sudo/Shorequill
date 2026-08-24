@@ -14,6 +14,7 @@ enum SurveyStage {
 struct SurveyView: View {
     let ground: Ground
     let order: Order?
+    var drill: Bool = false
     let onClose: () -> Void
 
     @EnvironmentObject var store: InkStore
@@ -25,6 +26,9 @@ struct SurveyView: View {
     @State private var targetIndex = 0
     @State private var fixes: [CGPoint] = []
     @State private var fixError: Double = 0
+    @State private var drillPoints = 0
+    @State private var drillQuality: Double = 0
+    @State private var freshSeals: [OfficeSeal] = []
 
     @State private var coastStroke: [CGPoint] = []
     @State private var inkScore: Double = 0
@@ -576,7 +580,8 @@ struct SurveyView: View {
                     FigureChip(value: "\(hills.count)", label: "hills")
                     FigureChip(value: "\(ground.soundingMarks.count)", label: "soundings")
                 }
-                WideDrawButton(title: "Go to station A", tint: Ink.oxblood) {
+                WideDrawButton(title: drill ? "Go to station A (round only)" : "Go to station A",
+                               tint: Ink.oxblood) {
                     stage = .bearings
                     stationIndex = 0
                     targetIndex = 0
@@ -598,7 +603,14 @@ struct SurveyView: View {
                     FigureChip(value: String(format: "%.0f", fixError * 1000), label: "error")
                     FigureChip(value: "\(fixes.count)", label: "points fixed")
                 }
-                WideDrawButton(title: "Ink the coast", tint: Ink.oxblood) { stage = .ink }
+                if drill {
+                    WideDrawButton(title: "Enter the round in the book",
+                                   subtitle: "angles and fix only", tint: Ink.oxblood) {
+                        completeDrill()
+                    }
+                } else {
+                    WideDrawButton(title: "Ink the coast", tint: Ink.oxblood) { stage = .ink }
+                }
             case .ink:
                 stageText("Ink the coastline",
                           "Draw one steady line along the pencil. A ruling pen does not stop and start.")
@@ -695,6 +707,16 @@ struct SurveyView: View {
         }
     }
 
+    private func completeDrill() {
+        let fixScore = max(0, min(1, 1 - fixError / 0.09))
+        drillQuality = fixScore
+        drillPoints = store.finishDrill(quality: fixScore,
+                                        marks: marks[0].count + marks[1].count)
+        freshSeals = store.newlyEarnedSeals()
+        stage = .done
+        Tap.heavy()
+    }
+
     private func finish() {
         let fixScore = max(0, min(1, 1 - fixError / 0.09))
         let hachureAverage = hachureScores.isEmpty ? 0
@@ -713,6 +735,7 @@ struct SurveyView: View {
                                  nameCurve: flatten(nameCurve),
                                  fixes: flatten(fixes))
         improved = store.finish(ground: ground, result: res, record: record, order: order)
+        freshSeals = store.newlyEarnedSeals()
         stage = .done
         Tap.heavy()
     }
@@ -726,7 +749,40 @@ struct SurveyView: View {
     }
 
     @ViewBuilder private var finishOverlay: some View {
-        if stage == .done, let r = result {
+        if stage == .done, drill {
+            ZStack {
+                Color.black.opacity(0.58).ignoresSafeArea()
+                    .onTapGesture { onClose() }
+                VStack {
+                    Spacer(minLength: 0)
+                    PaperCard(padding: 16) {
+                        VStack(alignment: .leading, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("A round of angles").font(Rule.title(19))
+                                    .foregroundColor(Ink.line)
+                                Text("\(ground.name) · two stations, no inking")
+                                    .font(Rule.italic(13)).foregroundColor(Ink.lineSoft)
+                            }
+                            MeasureRow(label: "The fix", value: drillQuality, tint: Ink.oxblood)
+                            HStack(spacing: 10) {
+                                FigureChip(value: "+\(drillPoints)", label: "points", onPaper: true)
+                                FigureChip(value: "\(marks[0].count + marks[1].count)",
+                                           label: "angles", onPaper: true)
+                                FigureChip(value: "\(store.liveStreak)", label: "streak", onPaper: true)
+                            }
+                            NoteBanner(title: "The day is entered",
+                                       detail: "A round of angles keeps the streak. The full sheet is still waiting on the board.",
+                                       tint: Ink.moss)
+                            WideDrawButton(title: "Back to the office", tint: Ink.oxblood) { onClose() }
+                        }
+                    }
+                    .padding(.horizontal, 18)
+                    Spacer(minLength: 0)
+                }
+                .centreColumn()
+            }
+            .overlay(sealOverlay)
+        } else if stage == .done, let r = result {
             ZStack {
                 Color.black.opacity(0.58).ignoresSafeArea()
                     .onTapGesture { onClose() }
@@ -767,6 +823,15 @@ struct SurveyView: View {
                     Spacer(minLength: 0)
                 }
                 .centreColumn()
+            }
+            .overlay(sealOverlay)
+        }
+    }
+
+    @ViewBuilder private var sealOverlay: some View {
+        if let seal = freshSeals.first {
+            SealToast(seal: seal) {
+                if !freshSeals.isEmpty { freshSeals.removeFirst() }
             }
         }
     }

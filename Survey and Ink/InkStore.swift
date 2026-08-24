@@ -36,6 +36,9 @@ struct InkSnapshot: Codable {
     var marksTaken: Int?
     var milesInked: Int?
     var plateRead: [String]?
+    var earnedSeals: [String]?
+    var drills: Int?
+    var drillBest: Double?
 }
 
 final class InkStore: ObservableObject {
@@ -50,6 +53,9 @@ final class InkStore: ObservableObject {
     @Published var marksTaken = 0
     @Published var milesInked = 0
     @Published var plateRead: Set<String> = []
+    @Published var earnedSeals: Set<String> = []
+    @Published var drills = 0
+    @Published var drillBest: Double = 0
 
     private let key = "surveyandink.portfolio.v1"
 
@@ -87,6 +93,34 @@ final class InkStore: ObservableObject {
             points += 6
             saveNow()
         }
+    }
+
+    func finishDrill(quality: Double, marks: Int) -> Int {
+        let day = Orders.dayIndex()
+        drills += 1
+        marksTaken += marks
+        drillBest = max(drillBest, quality)
+        let earned = Int((quality * 42).rounded()) + 9
+        points += earned
+        if lastDrawnDay != day {
+            if lastDrawnDay == day - 1 { streak += 1 } else { streak = 1 }
+            lastDrawnDay = day
+            bestStreak = max(bestStreak, streak)
+        }
+        saveNow()
+        return earned
+    }
+
+    func newlyEarnedSeals() -> [OfficeSeal] {
+        var fresh: [OfficeSeal] = []
+        for seal in SealBoard.all where !earnedSeals.contains(seal.id) {
+            if seal.test(self) {
+                earnedSeals.insert(seal.id)
+                fresh.append(seal)
+            }
+        }
+        if !fresh.isEmpty { saveNow() }
+        return fresh
     }
 
     func finish(ground: Ground, result: SurveyResult, record: ChartRecord,
@@ -138,6 +172,9 @@ final class InkStore: ObservableObject {
         marksTaken = snap.marksTaken ?? 0
         milesInked = snap.milesInked ?? 0
         plateRead = Set(snap.plateRead ?? [])
+        earnedSeals = Set(snap.earnedSeals ?? [])
+        drills = snap.drills ?? 0
+        drillBest = snap.drillBest ?? 0
     }
 
     func saveNow() {
@@ -145,7 +182,9 @@ final class InkStore: ObservableObject {
                                bestStreak: bestStreak, lastDrawnDay: lastDrawnDay,
                                charts: charts, orders: orders, surveys: surveys,
                                marksTaken: marksTaken, milesInked: milesInked,
-                               plateRead: Array(plateRead))
+                               plateRead: Array(plateRead),
+                               earnedSeals: Array(earnedSeals),
+                               drills: drills, drillBest: drillBest)
         if let data = try? JSONEncoder().encode(snap) {
             UserDefaults.standard.set(data, forKey: key)
         }

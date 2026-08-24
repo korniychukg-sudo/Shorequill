@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		SI0000000000000000003099 /* OfficeSeals.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001099 /* OfficeSeals.swift */; };
 		SI0000000000000000003001 /* DeskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001001 /* DeskView.swift */; };
 		SI0000000000000000003002 /* FieldViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001002 /* FieldViews.swift */; };
 		SI0000000000000000003003 /* GroundLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001003 /* GroundLibrary.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		SI0000000000000000001099 /* OfficeSeals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeSeals.swift; sourceTree = "<group>"; };
 		SI0000000000000000001001 /* DeskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskView.swift; sourceTree = "<group>"; };
 		SI0000000000000000001002 /* FieldViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViews.swift; sourceTree = "<group>"; };
 		SI0000000000000000001003 /* GroundLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundLibrary.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		SI0000000000000000006002 /* Survey and Ink */ = {
 			isa = PBXGroup;
 			children = (
+				SI0000000000000000001099 /* OfficeSeals.swift */,
 				SI0000000000000000001001 /* DeskView.swift */,
 				SI0000000000000000001002 /* FieldViews.swift */,
 				SI0000000000000000001003 /* GroundLibrary.swift */,
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				SI0000000000000000003099 /* OfficeSeals.swift in Sources */,
 				SI0000000000000000003001 /* DeskView.swift in Sources */,
 				SI0000000000000000003002 /* FieldViews.swift in Sources */,
 				SI0000000000000000003003 /* GroundLibrary.swift in Sources */,

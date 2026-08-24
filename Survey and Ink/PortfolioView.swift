@@ -3,6 +3,7 @@ import SwiftUI
 struct PortfolioView: View {
     @EnvironmentObject var store: InkStore
     @State private var selected: String?
+    @State private var showSeals = false
 
     var body: some View {
         ScrollView {
@@ -10,12 +11,20 @@ struct PortfolioView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("THE PORTFOLIO").font(Rule.title(11)).tracking(3.2)
                         .foregroundColor(Ink.brass)
-                    Text("Your sheets").font(Rule.title(24)).foregroundColor(Ink.paper)
-                    Text("Every chart is drawn from your own angles, your own line and your own lettering. Only the best sheet of each ground is kept.")
+                    Text(showSeals ? "The seals" : "Your sheets")
+                        .font(Rule.title(24)).foregroundColor(Ink.paper)
+                    Text(showSeals
+                         ? "What the office has stamped on the folio, and what it has not stamped yet."
+                         : "Every chart is drawn from your own angles, your own line and your own lettering. Only the best sheet of each ground is kept.")
                         .font(Rule.italic(14)).foregroundColor(Ink.paper.opacity(0.7))
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
+                folioPicker
+
+                if showSeals {
+                    SealCaseView()
+                } else {
                 HStack(spacing: 10) {
                     FigureChip(value: "\(store.chartCount)/\(GroundBook.all.count)",
                                label: "sheets", tint: Ink.oxblood, onPaper: false)
@@ -55,6 +64,7 @@ struct PortfolioView: View {
                         }
                     }
                 }
+                }
                 Color.clear.frame(height: 12)
             }
             .padding(.horizontal, Board.gutter)
@@ -70,6 +80,42 @@ struct PortfolioView: View {
                     .environmentObject(store)
             }
         }
+    }
+
+    private var folioPicker: some View {
+        HStack(spacing: 0) {
+            pickerTab(title: "Sheets", note: "\(store.chartCount)", on: !showSeals) {
+                showSeals = false
+            }
+            pickerTab(title: "Seals", note: "\(store.earnedSeals.count)", on: showSeals) {
+                showSeals = true
+            }
+        }
+        .padding(3)
+        .background(
+            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                .fill(Ink.baizeDark)
+                .overlay(RoundedRectangle(cornerRadius: 9, style: .continuous)
+                    .stroke(Ink.hairlineLight, lineWidth: 1))
+        )
+    }
+
+    private func pickerTab(title: String, note: String, on: Bool,
+                           action: @escaping () -> Void) -> some View {
+        Button(action: { Tap.light(); withAnimation(.easeOut(duration: 0.2)) { action() } }) {
+            HStack(spacing: 6) {
+                Text(title).font(Rule.title(14))
+                Text(note).font(Rule.figure(12)).opacity(0.75)
+            }
+            .foregroundColor(on ? Ink.paper : Ink.paper.opacity(0.6))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                    .fill(on ? Ink.oxblood : Color.clear)
+            )
+        }
+        .buttonStyle(.plain)
     }
 
     private var grid: some View {

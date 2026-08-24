@@ -3,12 +3,16 @@ import SwiftUI
 struct DeskView: View {
     @EnvironmentObject var store: InkStore
     @State private var openSurvey = false
+    @State private var openDrill = false
     @State private var openPlate: String?
     @State private var plateTitle = ""
 
     private var day: Int { Orders.dayIndex() }
     private var order: Order { Orders.forDay(day) }
     private var doneToday: DayOrder? { store.todayOrder() }
+    private var drillGround: Ground {
+        GroundBook.all[(day * 5 + store.drills * 3) % GroundBook.all.count]
+    }
 
     var body: some View {
         ScrollView {
@@ -16,8 +20,10 @@ struct DeskView: View {
                 header
                 LiftIn(index: 0) { OfficeScene(ground: order.ground) }
                 LiftIn(index: 1) { orderCard }
-                LiftIn(index: 2) { standingCard }
-                LiftIn(index: 3) { readingCard }
+                LiftIn(index: 2) { drillCard }
+                LiftIn(index: 3) { standingCard }
+                LiftIn(index: 4) { sealCard }
+                LiftIn(index: 5) { readingCard }
                 Color.clear.frame(height: 12)
             }
             .padding(.horizontal, Board.gutter)
@@ -28,6 +34,10 @@ struct DeskView: View {
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $openSurvey) {
             SurveyView(ground: order.ground, order: order) { openSurvey = false }
+                .environmentObject(store)
+        }
+        .fullScreenCover(isPresented: $openDrill) {
+            SurveyView(ground: drillGround, order: nil, drill: true) { openDrill = false }
                 .environmentObject(store)
         }
         .sheet(isPresented: Binding(get: { openPlate != nil },
@@ -77,6 +87,55 @@ struct DeskView: View {
                     WideDrawButton(title: "Take the order",
                                    subtitle: "Angles, ink, hachures, lettering and soundings",
                                    tint: Ink.oxblood) { openSurvey = true }
+                }
+            }
+        }
+    }
+
+    private var drillCard: some View {
+        PaperCard {
+            VStack(alignment: .leading, spacing: 10) {
+                RuledHead(title: "A round of angles", note: "ten minutes at the instrument")
+                Text("Two stations, the wire on each landmark, and the rays plotted. No inking, no hachures, no lettering. It is how a surveyor keeps his eye in between sheets, and the office counts the day.")
+                    .font(Rule.body(14)).foregroundColor(Ink.lineSoft)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack(spacing: 10) {
+                    FigureChip(value: drillGround.kind, label: "ground", onPaper: true)
+                    FigureChip(value: "\(store.drills)", label: "rounds", onPaper: true)
+                    FigureChip(value: store.drills > 0
+                               ? "\(Int((store.drillBest * 100).rounded()))" : "—",
+                               label: "best fix", onPaper: true)
+                }
+                Text(drillGround.name).font(Rule.title(16)).foregroundColor(Ink.line)
+                WideDrawButton(title: "Take a round", subtitle: drillGround.place,
+                               tint: Ink.sepia) { openDrill = true }
+            }
+        }
+    }
+
+    private var sealCard: some View {
+        let earned = SealBoard.all.filter { store.earnedSeals.contains($0.id) }
+        let next = SealBoard.all.first { !store.earnedSeals.contains($0.id) }
+        return PaperCard {
+            VStack(alignment: .leading, spacing: 10) {
+                RuledHead(title: "The office seals",
+                          note: "\(earned.count) of \(SealBoard.all.count) struck")
+                HStack(spacing: 8) {
+                    ForEach(SealBoard.all.prefix(6)) { seal in
+                        SealEmblem(kind: seal.emblem,
+                                   earned: store.earnedSeals.contains(seal.id), size: 42)
+                    }
+                    Spacer(minLength: 0)
+                }
+                MeterLine(value: Double(earned.count) / Double(SealBoard.all.count),
+                          tint: Ink.oxblood)
+                if let next = next {
+                    Text("Not yet struck: \(next.title) — \(next.note)")
+                        .font(Rule.body(13)).foregroundColor(Ink.lineSoft)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    Text("Every seal in the drawer is against your folio.")
+                        .font(Rule.italic(13)).foregroundColor(Ink.oxblood)
                 }
             }
         }
