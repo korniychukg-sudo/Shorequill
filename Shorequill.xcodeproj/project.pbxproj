@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		SI00000000000000004091 /* QuillGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI00000000000000002091 /* QuillGate.swift */; };
+		SI00000000000000004092 /* QuillPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI00000000000000002092 /* QuillPanel.swift */; };
+		SI00000000000000004093 /* QuillSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI00000000000000002093 /* QuillSplash.swift */; };
 		SI0000000000000000003099 /* OfficeSeals.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001099 /* OfficeSeals.swift */; };
 		SI0000000000000000003001 /* DeskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001001 /* DeskView.swift */; };
 		SI0000000000000000003002 /* FieldViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001002 /* FieldViews.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		SI00000000000000002091 /* QuillGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuillGate.swift; sourceTree = "<group>"; };
+		SI00000000000000002092 /* QuillPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuillPanel.swift; sourceTree = "<group>"; };
+		SI00000000000000002093 /* QuillSplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuillSplash.swift; sourceTree = "<group>"; };
 		SI0000000000000000001099 /* OfficeSeals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeSeals.swift; sourceTree = "<group>"; };
 		SI0000000000000000001001 /* DeskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskView.swift; sourceTree = "<group>"; };
 		SI0000000000000000001002 /* FieldViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViews.swift; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 		SI0000000000000000006002 /* Shorequill */ = {
 			isa = PBXGroup;
 			children = (
+				SI00000000000000002091 /* QuillGate.swift */,
+				SI00000000000000002092 /* QuillPanel.swift */,
+				SI00000000000000002093 /* QuillSplash.swift */,
 				SI0000000000000000001099 /* OfficeSeals.swift */,
 				SI0000000000000000001001 /* DeskView.swift */,
 				SI0000000000000000001002 /* FieldViews.swift */,
@@ -173,6 +182,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				SI00000000000000004091 /* QuillGate.swift in Sources */,
+				SI00000000000000004092 /* QuillPanel.swift in Sources */,
+				SI00000000000000004093 /* QuillSplash.swift in Sources */,
 				SI0000000000000000003099 /* OfficeSeals.swift in Sources */,
 				SI0000000000000000003001 /* DeskView.swift in Sources */,
 				SI0000000000000000003002 /* FieldViews.swift in Sources */,

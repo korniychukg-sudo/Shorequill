@@ -24,6 +24,7 @@ struct DeskView: View {
                 LiftIn(index: 3) { standingCard }
                 LiftIn(index: 4) { sealCard }
                 LiftIn(index: 5) { readingCard }
+                QuillPrivacyRow()
                 Color.clear.frame(height: 12)
             }
             .padding(.horizontal, Board.gutter)
