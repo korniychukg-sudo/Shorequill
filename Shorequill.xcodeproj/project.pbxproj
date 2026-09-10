@@ -20,7 +20,7 @@
 		SI0000000000000000003010 /* OfficeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001010 /* OfficeScene.swift */; };
 		SI0000000000000000003011 /* OfficeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001011 /* OfficeViews.swift */; };
 		SI0000000000000000003012 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001012 /* PortfolioView.swift */; };
-		SI0000000000000000003013 /* SurveyAndInkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001013 /* SurveyAndInkApp.swift */; };
+		SI0000000000000000003013 /* ShorequillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001013 /* ShorequillApp.swift */; };
 		SI0000000000000000003014 /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001014 /* SurveyModel.swift */; };
 		SI0000000000000000003015 /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000001015 /* SurveyView.swift */; };
 		SI0000000000000000004001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = SI0000000000000000002001 /* Assets.xcassets */; };
@@ -41,13 +41,13 @@
 		SI0000000000000000001010 /* OfficeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeScene.swift; sourceTree = "<group>"; };
 		SI0000000000000000001011 /* OfficeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeViews.swift; sourceTree = "<group>"; };
 		SI0000000000000000001012 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
-		SI0000000000000000001013 /* SurveyAndInkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyAndInkApp.swift; sourceTree = "<group>"; };
+		SI0000000000000000001013 /* ShorequillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShorequillApp.swift; sourceTree = "<group>"; };
 		SI0000000000000000001014 /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
 		SI0000000000000000001015 /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 		SI0000000000000000002001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		SI0000000000000000002002 /* Art */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Art; sourceTree = "<group>"; };
 		SI0000000000000000002090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		SI0000000000000000002099 /* Survey and Ink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Survey and Ink.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		SI0000000000000000002099 /* Shorequill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shorequill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,12 +64,12 @@
 		SI0000000000000000006001 = {
 			isa = PBXGroup;
 			children = (
-				SI0000000000000000006002 /* Survey and Ink */,
+				SI0000000000000000006002 /* Shorequill */,
 				SI0000000000000000006003 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		SI0000000000000000006002 /* Survey and Ink */ = {
+		SI0000000000000000006002 /* Shorequill */ = {
 			isa = PBXGroup;
 			children = (
 				SI0000000000000000001099 /* OfficeSeals.swift */,
@@ -85,20 +85,20 @@
 				SI0000000000000000001010 /* OfficeScene.swift */,
 				SI0000000000000000001011 /* OfficeViews.swift */,
 				SI0000000000000000001012 /* PortfolioView.swift */,
-				SI0000000000000000001013 /* SurveyAndInkApp.swift */,
+				SI0000000000000000001013 /* ShorequillApp.swift */,
 				SI0000000000000000001014 /* SurveyModel.swift */,
 				SI0000000000000000001015 /* SurveyView.swift */,
 				SI0000000000000000002001 /* Assets.xcassets */,
 				SI0000000000000000002002 /* Art */,
 				SI0000000000000000002090 /* Info.plist */,
 			);
-			path = "Survey and Ink";
+			path = "Shorequill";
 			sourceTree = "<group>";
 		};
 		SI0000000000000000006003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				SI0000000000000000002099 /* Survey and Ink.app */,
+				SI0000000000000000002099 /* Shorequill.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,9 +106,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		SI0000000000000000007001 /* Survey and Ink */ = {
+		SI0000000000000000007001 /* Shorequill */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = SI0000000000000000008001 /* Build configuration list for PBXNativeTarget "Survey and Ink" */;
+			buildConfigurationList = SI0000000000000000008001 /* Build configuration list for PBXNativeTarget "Shorequill" */;
 			buildPhases = (
 				SI0000000000000000009001 /* Sources */,
 				SI0000000000000000005001 /* Frameworks */,
@@ -118,9 +118,9 @@
 			);
 			dependencies = (
 			);
-			name = "Survey and Ink";
-			productName = "Survey and Ink";
-			productReference = SI0000000000000000002099 /* Survey and Ink.app */;
+			name = "Shorequill";
+			productName = "Shorequill";
+			productReference = SI0000000000000000002099 /* Shorequill.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -138,7 +138,7 @@
 					};
 				};
 			};
-			buildConfigurationList = SI0000000000000000008002 /* Build configuration list for PBXProject "Survey and Ink" */;
+			buildConfigurationList = SI0000000000000000008002 /* Build configuration list for PBXProject "Shorequill" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -151,7 +151,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				SI0000000000000000007001 /* Survey and Ink */,
+				SI0000000000000000007001 /* Shorequill */,
 			);
 		};
 /* End PBXProject section */
@@ -186,7 +186,7 @@
 				SI0000000000000000003010 /* OfficeScene.swift in Sources */,
 				SI0000000000000000003011 /* OfficeViews.swift in Sources */,
 				SI0000000000000000003012 /* PortfolioView.swift in Sources */,
-				SI0000000000000000003013 /* SurveyAndInkApp.swift in Sources */,
+				SI0000000000000000003013 /* ShorequillApp.swift in Sources */,
 				SI0000000000000000003014 /* SurveyModel.swift in Sources */,
 				SI0000000000000000003015 /* SurveyView.swift in Sources */,
 			);
@@ -294,14 +294,14 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Survey and Ink/Info.plist";
+				INFOPLIST_FILE = "Shorequill/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.surveyandink.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shorequill.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -323,14 +323,14 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Survey and Ink/Info.plist";
+				INFOPLIST_FILE = "Shorequill/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.surveyandink.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shorequill.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -345,7 +345,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		SI0000000000000000008001 /* Build configuration list for PBXNativeTarget "Survey and Ink" */ = {
+		SI0000000000000000008001 /* Build configuration list for PBXNativeTarget "Shorequill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				SI0000000000000000008103 /* Debug */,
@@ -354,7 +354,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		SI0000000000000000008002 /* Build configuration list for PBXProject "Survey and Ink" */ = {
+		SI0000000000000000008002 /* Build configuration list for PBXProject "Shorequill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				SI0000000000000000008101 /* Debug */,

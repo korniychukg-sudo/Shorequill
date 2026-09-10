@@ -57,7 +57,7 @@ final class InkStore: ObservableObject {
     @Published var drills = 0
     @Published var drillBest: Double = 0
 
-    private let key = "surveyandink.portfolio.v1"
+    private let key = "shorequill.portfolio.v1"
 
     init() { load() }
 

@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SurveyAndInkApp: App {
+struct ShorequillApp: App {
     @StateObject private var store = InkStore()
     @Environment(\.scenePhase) private var scenePhase
 
